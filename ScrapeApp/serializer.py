@@ -7,6 +7,11 @@ class PageExtractSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class PageExtractListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PageExtract
+        exclude = ['data']
+
 class RegexSerializer(serializers.ModelSerializer):
     class Meta:
         model = RegexModel
