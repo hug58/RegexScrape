@@ -18,6 +18,7 @@ class PageExtractViewSet(viewsets.ModelViewSet):
         return super().get_serializer_class()
 
     def create(self, request, format=None, *args, **kwargs):
+        """Create a new page extract and download page html and extract data with regex"""
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
