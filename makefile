@@ -1,7 +1,7 @@
 
 
 run-task:
-	celery -A RegexScrape worker -l INFO
+	celery -A regex_scrape worker -l INFO
 
 run:
 	python manage.py runserver
