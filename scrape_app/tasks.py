@@ -1,3 +1,4 @@
+""" celery taks """
 import re
 from typing import Optional
 import requests
@@ -8,18 +9,17 @@ from .models import RegexModel,PageExtract
 
 
 @shared_task
-def get_pages_and_process_with_regex(data:Optional[dict],_id:int) -> None:
+def get_pages_and_process_with_regex(data:Optional[dict],_id:int) -> bool:
     """ Get page and get data from html using regex"""
     url:str = data['url_base']
     regexs:str = data['regex']
     page_html:str = ""
     result:dict= {}
 
-
     try:
         page_extract = PageExtract.objects.get(id = _id)
     except PageExtract.DoesNotExist:
-        return None
+        return False
 
     if cache.get(url, None) is None:
         print("No cache")
@@ -41,9 +41,10 @@ def get_pages_and_process_with_regex(data:Optional[dict],_id:int) -> None:
         result[regex.name] = re.findall(regex.pattern, page_html)
 
     if page_extract.data is not None:
-        for key in result.keys():
+        for _,key in result.items():
             page_extract.data[key] = result[key]
     else:
         page_extract.data = result
 
     page_extract.save()
+    return True

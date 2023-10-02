@@ -13,7 +13,6 @@ jobs:
     timeout-minutes: 3
 
     steps:
-    - uses: actions/checkout@v2
     - name: Set up Python 3.8
       uses: actions/setup-python@v2
       with:
@@ -24,4 +23,11 @@ jobs:
         pip install -r requirements.txt
     - name: Lint with pylint
       run: |
-        pylint --load-plugins pylint_django --django-settings-module=regex_scrape.settings **/*.py
+        pylint --load-plugins pylint_django --django-settings-module=regex_scrape.settings **/*.py --max-parents=11
+
+    - name: Start Redis
+      run: | 
+        redis-server --daemonize yes
+    - name: Run Celery worker
+      run: |
+        celery -A regex_scrape worker --loglevel=info

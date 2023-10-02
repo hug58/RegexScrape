@@ -1,3 +1,4 @@
+"""models"""
 from django.db import models
 
 
@@ -15,7 +16,7 @@ class RegexModel(models.Model):
 
 
     def __str__(self):
-        return f'This regex matches {self.name}' 
+        return f'This regex matches {self.name}'
 
 class PageExtract(models.Model):
     """Model for extracting pages from"""
