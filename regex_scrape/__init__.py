@@ -1,3 +1,4 @@
+"""Load celery configuration"""
 
 from .celery import app as celery_app
 

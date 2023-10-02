@@ -1,20 +1,14 @@
 
-import json
-
-# Create your views here.
 from rest_framework.response import Response
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets
 
 from .models import PageExtract,RegexModel
 from .serializer import PageExtractSerializer, RegexSerializer, PageExtractListSerializer
-from rest_framework import status
-from django.http import Http404
-
-
-
 from .tasks import get_pages_and_process_with_regex
+
     
 class PageExtractViewSet(viewsets.ModelViewSet):
+    """View set to extract"""
     queryset= PageExtract.objects.all()
     serializer_class = PageExtractSerializer
 
@@ -32,5 +26,6 @@ class PageExtractViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=202)
     
 class RegexViewSet(viewsets.ModelViewSet):
+    """ Viewset regex"""
     queryset = RegexModel.objects.all()
-    serializer_class = RegexSerializer  
+    serializer_class = RegexSerializer
