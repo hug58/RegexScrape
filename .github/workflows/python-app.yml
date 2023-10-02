@@ -24,5 +24,4 @@ jobs:
         pip install -r requirements.txt
     - name: Lint with pylint
       run: |
-        pylint regex_scrape/
-        pylint ScrapeApp/
+        pylint --load-plugins pylint_django --django-settings-module=regex_scrape.settings **/*.py

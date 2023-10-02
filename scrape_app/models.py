@@ -10,6 +10,7 @@ class RegexModel(models.Model):
 
 
     class Meta:
+        """Base class for objects"""
         ordering = ['-created_at']
 
 
@@ -29,6 +30,7 @@ class PageExtract(models.Model):
 
 
     class Meta:
+        """Base class for objects"""
         ordering = ['-created_at']
 
 

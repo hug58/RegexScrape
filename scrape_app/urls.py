@@ -10,4 +10,3 @@ ROUTER.register(r'regex', RegexViewSet)
 urlpatterns = [
     path('', include(ROUTER.urls)),
 ]
-
